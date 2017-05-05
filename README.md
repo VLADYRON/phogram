@@ -1,4 +1,4 @@
 ### phogram
 
 * Database
-[DB](#./docs/db/DB.md)
+[DB](#docs/db/DB.md)
