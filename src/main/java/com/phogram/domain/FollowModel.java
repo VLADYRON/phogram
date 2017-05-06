@@ -16,9 +16,13 @@ public class FollowModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 1)
     private int status;
+    @Column(length = 1)
     private int type;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
 
     @ManyToOne

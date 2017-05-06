@@ -16,7 +16,9 @@ public class CommentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false,length = 150)
     private String content;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
     @ManyToOne

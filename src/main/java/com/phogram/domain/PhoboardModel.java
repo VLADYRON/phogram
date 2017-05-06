@@ -19,14 +19,15 @@ public class PhoboardModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String descr;
-    private String name;
-    private String path;
+    private String name; // file name
+    private String path; // file position
+    @Column(length = 1)
     private int status;
-    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
-    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
-    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date deleteAt;
 
     @ManyToOne

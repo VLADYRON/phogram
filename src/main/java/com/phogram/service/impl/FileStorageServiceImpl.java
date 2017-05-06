@@ -1,8 +1,8 @@
 package com.phogram.service.impl;
 
 
-import com.phogram.config.StorageException;
-import com.phogram.config.StorageFileNotFoundException;
+import com.phogram.exception.StorageException;
+import com.phogram.exception.StorageFileNotFoundException;
 import com.phogram.service.FileStorageService;
 import com.phogram.utils.PGFileHandler;
 import com.phogram.utils.PGTimeUtil;
@@ -19,9 +19,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.stream.Stream;
 
 /**
  * Created by gavin on 2017. 5. 6..

@@ -18,6 +18,7 @@ public class TagModel {
     private Long id;
     private String tag;
     private int count;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

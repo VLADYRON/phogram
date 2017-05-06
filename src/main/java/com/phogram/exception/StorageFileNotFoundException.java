@@ -1,4 +1,4 @@
-package com.phogram.config;
+package com.phogram.exception;
 
 /**
  * Created by gavin on 2017. 5. 6..

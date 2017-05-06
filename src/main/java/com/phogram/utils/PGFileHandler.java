@@ -3,12 +3,10 @@ package com.phogram.utils;
 
 import java.io.File;
 
-import com.phogram.config.StorageException;
-import com.phogram.config.StorageFileNotFoundException;
-import com.phogram.service.FileStorageService;
+import com.phogram.exception.StorageException;
+import com.phogram.exception.StorageFileNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
