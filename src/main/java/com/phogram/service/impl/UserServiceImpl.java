@@ -1,5 +1,6 @@
 package com.phogram.service.impl;
 
+import com.phogram.domain.UserModel;
 import com.phogram.dto.UserDTO;
 import com.phogram.repository.UserRepository;
 import com.phogram.service.UserService;
@@ -8,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.Optional;
 
 /**
  * Created by gavin on 2017. 5. 5..
@@ -39,13 +42,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDTO findByUsername(String userName) throws Exception {
-        return null;
-    }
+    public Optional<UserDTO> findByUsernameOrEmail(String usernameOrEmail) throws Exception {
+        UserModel userModel = userRepository.findByEmailOrUsernameOrPhone(usernameOrEmail,usernameOrEmail,usernameOrEmail);
+        if(ObjectUtils.isEmpty(userModel)) return Optional.empty();
+        UserDTO userDTO = new UserDTO(
+                userModel.getFirstName(),
+                userModel.getLastName(),
+                userModel.getUsername(),
+                userModel.getPassword(),
+                userModel.getEmail(),
+                userModel.getPhone(),
+                userModel.getGravataUrl());
 
-    @Override
-    public UserDTO findByEmail(String email) throws Exception {
-        return null;
+        return Optional.of(userDTO);
     }
 
     @Override

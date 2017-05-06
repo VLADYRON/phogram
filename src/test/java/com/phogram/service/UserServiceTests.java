@@ -18,23 +18,36 @@ public class UserServiceTests {
 
 	@Test
 	@Ignore
-	public void createUser(){
-		String firstName = "Gavin";
-		String lastName = "Kim";
-		String username = "Gavin";
-		String email = "test@test.com";
+	public void createUserTest(){
+		String firstName = "Test1";
+		String lastName = "Test1";
+		String username = "Test1";
+		String email = "test1@test.com";
 		String phone = "010-1234-5678";
-		String password = "test";
+		String password = "test1";
 		String gravataurl = "http://1.gravatar.com/avatar/8635ec3bc374565ad881afc0f3faa919";
 
 		UserDTO userDTO = new UserDTO(firstName,lastName,username,password,email,phone,gravataurl);
 		try {
-			userService.create(userDTO);
+			Assert.isTrue(userService.create(userDTO),"Ok");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
+	@Ignore
+	public void findByUsernameOrEmail() {
+		try {
+			Assert.isTrue(userService.findByUsernameOrEmail("test1@test.com").isPresent(),"Ok");
+			Assert.isTrue(!userService.findByUsernameOrEmail("1test1@test.com").isPresent(),"Fail");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	@Ignore
 	public void duplicateCheckTest(){
 		try {
 			Assert.isTrue(!userService.duplicateCheck("1test@test.com"),"Fail");
