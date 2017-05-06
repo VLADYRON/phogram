@@ -1,5 +1,6 @@
 package com.phogram.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,4 +19,12 @@ public class FavesModel {
     private int type;
     private Date createAt;
     private Date updateAt;
+
+    @ManyToOne
+    @JsonBackReference
+    private UserModel user;
+
+    @ManyToOne
+    @JoinColumn(name="phoboard_id")
+    private PhoboardModel phoboards;
 }

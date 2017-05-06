@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by gavin on 2017. 5. 5..
@@ -18,4 +19,10 @@ public class TagModel {
     private String tag;
     private int count;
     private Date createAt;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "phoboard_tags",
+            joinColumns = @JoinColumn(name = "phoboard_id"),
+            inverseJoinColumns = @JoinColumn(name = "tags_id"))
+    private List<PhoboardModel> phoboard;
 }

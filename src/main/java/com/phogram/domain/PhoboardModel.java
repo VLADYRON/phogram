@@ -1,10 +1,12 @@
 package com.phogram.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by gavin on 2017. 5. 5..
@@ -27,4 +29,10 @@ public class PhoboardModel {
     @CreationTimestamp
     private Date deleteAt;
 
+    @ManyToOne
+    @JsonBackReference
+    private UserModel user;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "phoboard")
+    private List<TagModel> tags;
 }

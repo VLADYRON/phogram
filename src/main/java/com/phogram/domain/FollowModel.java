@@ -1,5 +1,6 @@
 package com.phogram.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,4 +21,7 @@ public class FollowModel {
     private Date createAt;
     private Date updateAt;
 
+    @ManyToOne
+    @JsonBackReference
+    private UserModel user;
 }
