@@ -1,4 +1,4 @@
-package com.phogram.config;
+package com.phogram.security;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

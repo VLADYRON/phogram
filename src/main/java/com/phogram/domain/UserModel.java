@@ -29,9 +29,10 @@ public class UserModel {
     private String lastName;
     @Column(name="password", nullable = false)
     private String password;
-    @Column(name="email", nullable = false, updatable = false,unique = true,length = 100)
+    @Column(name="email", nullable = false,unique = true,length = 100)
     private String email;
-    @Column(name="phone", updatable = false,unique = true,length = 13)
+    /*updatable=false 일 경우 업데이트 되지 않음. 기본 값은 true*/
+    @Column(name="phone",unique = true,length = 13)
     private String phone;
     private String gravataUrl;
     @Temporal(TemporalType.TIMESTAMP)

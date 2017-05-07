@@ -34,7 +34,25 @@ public class UserServiceTests {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	@Ignore
+	public void updateUser(){
+		String firstName = "Gavin";
+		String lastName = "Kim";
+		String username = "Test1";
+		String email = "test1@test.com";
+		String phone = "010-2020-2222";
+		String password = "test";
+		String gravataurl = "http://1.gravatar.com/avatar/8635ec3bc374565ad881afc0f3faa919";
 
+		UserDTO userDTO = new UserDTO(firstName,lastName,username,password,email,phone,gravataurl);
+
+		try {
+			Assert.isTrue(userService.update(userDTO),"OK");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Test
 	@Ignore
 	public void findByUsernameOrEmailOrPhone() {

@@ -36,9 +36,9 @@ public class UserDTO{
     //01012345678
     //010-1234-4567
     //010)1234-5678
-    //@Pattern(regexp = "\\d{11}|(?:\\d{3}-){4}\\d{4}|\\(\\d{3}\\)\\d{4}-?\\d{4}")
+
     @Size(max = 13)
-    @Pattern(regexp = "(?:\\d{3}-){4}\\d{4}") // 010-1234-5678
+    @Pattern(regexp = "\\d{11}|(?:\\d{3}-){4}\\d{4}|\\(\\d{3}\\)\\d{4}-?\\d{4}")
     private final String phone;
 
     private final String gravataUrl;

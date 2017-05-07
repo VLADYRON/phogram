@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Optional;
 
@@ -35,15 +36,21 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean update(UserDTO userDTO){
         try {
-            UserModel currentUser = userRepository.findByEmailOrUsernameOrPhone(userDTO.getEmail(),"","");
+            UserModel currentUser = userRepository.findByEmailOrUsernameOrPhone("",userDTO.getUsername(),"");
             if(currentUser != null){
-                currentUser.setLastName(userDTO.getLastName());
-                currentUser.setFirstName(userDTO.getFirstName());
-                currentUser.setGravataUrl(userDTO.getGravataUrl());
+                UserModel updateUser = userDTO.toUserModel();
+                currentUser.setLastName(updateUser.getLastName());
+                currentUser.setFirstName(updateUser.getFirstName());
+                currentUser.setGravataUrl(updateUser.getGravataUrl());
                 currentUser.setUpdateAt(new Date());
-                currentUser.setPassword(userDTO.getPassword());
-                currentUser.setUpdateAt(new Date());
-                userRepository.saveAndFlush(currentUser);
+                currentUser.setPassword(updateUser.getPassword());
+                currentUser.setPhone(updateUser.getPhone());
+                currentUser.setUsername(updateUser.getUsername());
+                currentUser.setEmail(updateUser.getEmail());
+
+                UserModel aa = userRepository.save(currentUser);
+
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,11 +73,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Optional<UserDTO> findByUsernameOrEmailOrPhone(String usernameOrEmailOrPhone){
-        UserDTO userDTO = null;
         try {
             UserModel userModel = userRepository.findByEmailOrUsernameOrPhone(usernameOrEmailOrPhone,usernameOrEmailOrPhone,usernameOrEmailOrPhone);
             if(ObjectUtils.isEmpty(userModel)) return Optional.empty();
-            userDTO = new UserDTO(
+            UserDTO userDTO = new UserDTO(
                     userModel.getFirstName(),
                     userModel.getLastName(),
                     userModel.getUsername(),
@@ -78,11 +84,11 @@ public class UserServiceImpl implements UserService{
                     userModel.getEmail(),
                     userModel.getPhone(),
                     userModel.getGravataUrl());
+            return Optional.of(userDTO);
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getMessage());
             return Optional.empty();
         }
-        return Optional.of(userDTO);
     }
 }
