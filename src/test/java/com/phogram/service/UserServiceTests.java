@@ -37,25 +37,14 @@ public class UserServiceTests {
 
 	@Test
 	@Ignore
-	public void findByUsernameOrEmail() {
+	public void findByUsernameOrEmailOrPhone() {
 		try {
-			Assert.isTrue(userService.findByUsernameOrEmail("test1@test.com").isPresent(),"Ok");
-			Assert.isTrue(!userService.findByUsernameOrEmail("1test1@test.com").isPresent(),"Fail");
+			System.out.println("XX: "+userService.findByUsernameOrEmailOrPhone("test1@test.com").get());
+			Assert.isTrue(userService.findByUsernameOrEmailOrPhone("test1@test.com").isPresent(),"Ok");
+			Assert.isTrue(!userService.findByUsernameOrEmailOrPhone("1test1@test.com").isPresent(),"Fail");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Test
-	@Ignore
-	public void duplicateCheckTest(){
-		try {
-			Assert.isTrue(!userService.duplicateCheck("1test@test.com"),"Fail");
-			Assert.isTrue(userService.duplicateCheck("test@test.com"),"Ok");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 }

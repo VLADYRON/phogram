@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<UserDTO> findByUsernameOrEmail(String usernameOrEmail) throws Exception {
-        UserModel userModel = userRepository.findByEmailOrUsernameOrPhone(usernameOrEmail,usernameOrEmail,usernameOrEmail);
+    public Optional<UserDTO> findByUsernameOrEmailOrPhone(String usernameOrEmailOrPhone) throws Exception {
+        UserModel userModel = userRepository.findByEmailOrUsernameOrPhone(usernameOrEmailOrPhone,usernameOrEmailOrPhone,usernameOrEmailOrPhone);
         if(ObjectUtils.isEmpty(userModel)) return Optional.empty();
         UserDTO userDTO = new UserDTO(
                 userModel.getFirstName(),
@@ -55,13 +55,5 @@ public class UserServiceImpl implements UserService{
                 userModel.getGravataUrl());
 
         return Optional.of(userDTO);
-    }
-
-    @Override
-    public boolean duplicateCheck(String check) throws Exception {
-        if(!ObjectUtils.isEmpty(userRepository.findByEmailOrUsernameOrPhone(check,check,check))){
-            return true;
-        }
-        return false;
     }
 }
