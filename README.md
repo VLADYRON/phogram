@@ -20,11 +20,7 @@
 ```
 + USER
     - register
-        POST:localhost:8080/user/register
-        * require field and unique
-          username -> min:4,max:100
-          password -> min:6,max:512 (password encoding by BCryptPasswordEncoder)
-        
+        POST:localhost:8080/user/register 
         RequestBody{
             {
             	"firstName":"test2",
@@ -60,18 +56,19 @@
          }
     - update user info
          PUT:localhost:8080/rest/user
-             Header:{Content-Type:application/json,Authorization:BKHeader receivedToken}
+             Header:{Content-Type:application/json,Authorization:PG-Auth receivedToken}
          RequestBody{
             "username": "test1", --> can't change username
             "password": "changepassword",
             "email": "changeEmail@example.com"
+            ...
          }
          Response{
             Stirng : message
          }
     - delete user info
          DELETE:localhost:8080/rest/user
-             Header:{Content-Type:application/json,Authorization:BKHeader receivedToken}
+             Header:{Content-Type:application/json,Authorization:PG-Auth receivedToken}
          Response{
             Stirng : message
          }
