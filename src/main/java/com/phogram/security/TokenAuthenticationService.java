@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 /**
  * Created by gavin on 2017. 5. 7..
+ * token 값을 header 에 넣을 경우 사용한다.
  */
 @Component
 public class TokenAuthenticationService {
