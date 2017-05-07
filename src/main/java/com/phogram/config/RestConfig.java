@@ -1,5 +1,6 @@
-package com.phogram.security;
+package com.phogram.config;
 
+import com.phogram.security.JwtFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +32,7 @@ public class RestConfig {
     public FilterRegistrationBean jwtFilter() {
         final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new JwtFilter());
-        registrationBean.addUrlPatterns("/rest/*");
+        registrationBean.addUrlPatterns("/api/*");
         return registrationBean;
     }
 }

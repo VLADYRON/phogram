@@ -4,6 +4,7 @@ import com.phogram.domain.UserModel;
 import com.phogram.dto.UserDTO;
 import com.phogram.repository.UserRepository;
 import com.phogram.service.UserService;
+import com.phogram.utils.PGConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean update(UserDTO userDTO){
         try {
-            UserModel currentUser = userRepository.findByEmailOrUsernameOrPhone("",userDTO.getUsername(),"");
+            UserModel currentUser = userRepository.findByUsername(userDTO.getUsername());
             if(currentUser != null){
                 UserModel updateUser = userDTO.toUserModel();
                 currentUser.setLastName(updateUser.getLastName());
@@ -48,8 +49,7 @@ public class UserServiceImpl implements UserService{
                 currentUser.setUsername(updateUser.getUsername());
                 currentUser.setEmail(updateUser.getEmail());
 
-                UserModel aa = userRepository.save(currentUser);
-
+                userRepository.save(currentUser);
                 return true;
             }
         } catch (Exception e) {
@@ -60,9 +60,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean delete(Long index) {
+    public boolean delete(String username) {
         try {
-            userRepository.delete(index);
+            //userRepository.deleteByUsername(username);
+            UserModel deleteUser =userRepository.findByUsername(username);
+            deleteUser.setDeleteAt(new Date());
+            deleteUser.setActive(PGConstants.USER_DISABLE);
+            userRepository.saveAndFlush(deleteUser);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,9 +76,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<UserDTO> findByUsernameOrEmailOrPhone(String usernameOrEmailOrPhone){
+    public Optional<UserDTO> findByUsername(String username){
         try {
-            UserModel userModel = userRepository.findByEmailOrUsernameOrPhone(usernameOrEmailOrPhone,usernameOrEmailOrPhone,usernameOrEmailOrPhone);
+            UserModel userModel = userRepository.findByUsername(username);
             if(ObjectUtils.isEmpty(userModel)) return Optional.empty();
             UserDTO userDTO = new UserDTO(
                     userModel.getFirstName(),

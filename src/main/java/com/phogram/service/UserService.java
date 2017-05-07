@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserService {
     boolean create(UserDTO userDTO) throws Exception;
     boolean update(UserDTO userDTO) throws Exception;
-    boolean delete(Long index) throws Exception;
-    Optional<UserDTO> findByUsernameOrEmailOrPhone(String usernameOrEmailOrPhone) throws Exception;
+    boolean delete(String username) throws Exception;
+    Optional<UserDTO> findByUsername(String username) throws Exception;
 
 }

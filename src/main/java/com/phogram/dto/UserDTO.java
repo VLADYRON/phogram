@@ -2,6 +2,7 @@ package com.phogram.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.phogram.domain.UserModel;
+import com.phogram.utils.PGConstants;
 import lombok.Data;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
@@ -87,7 +88,7 @@ public class UserDTO{
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         user.setEmail(email);
         user.setCreateAt(new Date());
-        user.setEnable(0);//0->사용중 1-> 회원탈퇴)
+        user.setActive(PGConstants.USER_ENABLE);//0->사용중 1-> 회원탈퇴)
         return user;
     }
 }

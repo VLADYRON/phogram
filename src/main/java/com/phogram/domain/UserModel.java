@@ -39,8 +39,10 @@ public class UserModel {
     private Date createAt;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deleteAt;
     @Column(length = 1)
-    private int enable;
+    private int active;
     @Column(length = 1)
     private int status;
 
