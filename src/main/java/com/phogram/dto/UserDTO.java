@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * Created by gavin on 2017. 5. 5..
@@ -58,7 +59,24 @@ public class UserDTO{
         this.phone = phone;
         this.gravataUrl = gravataUrl;
     }
-
+//    public Optional<String> getUsername(){
+//        return Optional.ofNullable(username);
+//    }
+//    public Optional<String> getEmail(){
+//        return Optional.ofNullable(email);
+//    }
+//    public Optional<String> getLastName(){
+//        return Optional.ofNullable(lastName);
+//    }
+//    public Optional<String> getfirstNme(){
+//        return Optional.ofNullable(firstName);
+//    }
+//    public Optional<String> getPhone(){
+//        return Optional.ofNullable(phone);
+//    }
+//    public Optional<String> getEncodedPassword() {
+//        return Optional.ofNullable(password).map(p -> new BCryptPasswordEncoder().encode(p));
+//    }
     public UserModel toUserModel() {
         UserModel user = new UserModel();
         user.setFirstName(firstName);
